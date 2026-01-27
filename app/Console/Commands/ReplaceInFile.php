@@ -141,7 +141,7 @@ class ReplaceInFile extends Command
 
     protected function getComposeProjectName(array $envs): string
     {
-        $host = str_replace('_', '-', $envs['app_host']);
+        $host = str_replace('_', '-', $envs['APP_HOST']);
         $domain = str_replace('_', '-', $envs['APP_DOMAIN']);
         $path = str_replace('_', '-', $envs['APP_PATH']);
         $path = str_replace('/', '-', $envs['APP_PATH']);
