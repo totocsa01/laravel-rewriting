@@ -1,0 +1,29 @@
+{
+    "name": "totocsa01/laravel-rewriting",
+    "description": "",
+    "license": "MIT",
+    "minimum-stability": "dev",
+    "authors": [
+        {
+            "name": "Csaba Tóth",
+            "email": "totocsa01@gmail.com"
+        }
+    ],
+    "type": "library",
+    "autoload": {
+        "psr-4": {
+            "Totocsa01\\Rewriting\\": "./"
+        }
+    },
+    "require": {
+        "php": "^7.4|^8.0",
+        "laravel/framework": "^10.0|^11.0|^12.0"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Totocsa01\\Rewriting\\RewritingServiceProvider"
+            ]
+        }
+    }
+}
