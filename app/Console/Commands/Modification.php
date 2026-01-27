@@ -26,7 +26,7 @@ class Modification extends Command
 
     public function handle(): int
     {
-        $this->versions_dir = $this->option('versions-dir');
+        $this->versions_dir = $this->argument('versions-dir');
 
         if (!is_dir($this->versions_dir)) {
             $this->exitCode = self::EXIT_CODE_VERSIONS_DIRECTORY_NOT_DIRECTORY;
