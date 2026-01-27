@@ -15,7 +15,7 @@ class Modification extends Command
     private const EXIT_CODE_COPY_ERROR = 7;
 
     protected $signature = 'rewriting:modification'
-        . ' {--versions-dir= : Versions base directory.}';
+        . ' {versions-dir : Versions base directory.}';
 
     protected $description = 'Modify the application files.';
 
