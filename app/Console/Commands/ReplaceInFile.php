@@ -107,7 +107,7 @@ class ReplaceInFile extends Command
             }
         }
 
-
+        $merged['COMPOSE_PROJECT_NAME'] = $this->getComposeProjectName($merged);
         $merged['APP_URL'] = "{$merged['APP_PROTOCOL']}://{$merged['APP_HOST']}.{$merged['APP_DOMAIN']}{$merged['APP_PATH']}";
         $merged['VITE_HOST'] = "{$merged['APP_HOST']}.{$merged['APP_DOMAIN']}";
         $merged['VITE_PROTOCOL'] = $merged['APP_PROTOCOL'];
@@ -137,6 +137,22 @@ class ReplaceInFile extends Command
         }
 
         return $rewritingEnvs;
+    }
+
+    protected function getComposeProjectName(array $envs): string
+    {
+        $host = str_replace('_', '-', $envs['app_host']);
+        $domain = str_replace('_', '-', $envs['APP_DOMAIN']);
+        $path = str_replace('_', '-', $envs['APP_PATH']);
+        $path = str_replace('/', '-', $envs['APP_PATH']);
+
+        $name = "{$host}_{$domain}"
+            . ($path == '-' ? '' : '_' . substr($path, 1));
+
+        $name = preg_replace('/[^a-z0-9_-]+/', '-', strtolower($name));
+        $name = preg_replace('/^[^a-z0-9]+|[^a-z0-9_-]+/', '-', strtolower($name));
+
+        return $name;
     }
 
     protected function replacesInFile(string $filename, array $rules): void
