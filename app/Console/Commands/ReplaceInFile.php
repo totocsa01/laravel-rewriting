@@ -11,7 +11,7 @@ class ReplaceInFile extends Command
 
     public function handle(): int
     {
-        $replaces = config('rewriting.replaces');
+        $replaces = config('rewriting');
 
         if (is_array($replaces) && count($replaces) > 0) {
             $filename = $this->argument('filename');
