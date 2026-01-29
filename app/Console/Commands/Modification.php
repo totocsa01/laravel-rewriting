@@ -4,6 +4,7 @@ namespace Totocsa01\Rewriting\app\Console\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\File;
+use SplFileInfo;
 
 class Modification extends Command
 {
@@ -216,7 +217,6 @@ class Modification extends Command
     {
         $modifiedDir = realpath($this->versions_dir . self::DS . $versionDir . self::DS . 'modified');
         $modifiedDirLen = strlen($modifiedDir);
-        $this->line("Source: $versionDir");
 
         $iterator = new \RecursiveIteratorIterator(
             new \RecursiveDirectoryIterator($modifiedDir, \RecursiveDirectoryIterator::SKIP_DOTS),
@@ -259,6 +259,10 @@ class Modification extends Command
     protected function copy(string $from, string $to): bool
     {
         $isSuccess = @File::copy($from, $to);
+
+        if ($isSuccess) {
+            @File::chmod($to, fileperms($from));
+        }
 
         if (!$isSuccess) {
             $error = error_get_last();
